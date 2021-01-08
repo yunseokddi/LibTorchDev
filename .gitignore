@@ -470,3 +470,4 @@ fabric.properties
 
 #add ignore custom files
 *.pt
+*.lib
