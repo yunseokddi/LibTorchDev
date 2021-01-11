@@ -2,10 +2,11 @@
 #include <torch/script.h>
 #include <iostream>
 #include <iomanip>
+#include <string>
 
 using namespace std;
 
-void print_script_module(const torch::jit::script::Module& module, size_t spaces = 0);
+//void print_script_module(const torch::jit::script::Module& module, size_t spaces = 0);
 
 int main()
 {
@@ -199,35 +200,108 @@ int main()
 	//                      SAVE AND LOAD A MODEL                      //
 	// =============================================================== //
 
-	torch::nn::Sequential model
-	{
-		torch::nn::Conv2d(torch::nn::Conv2dOptions(1,16,3).stride(2).padding(1)),
-		torch::nn::ReLU()
-	};
+	//torch::nn::Sequential model
+	//{
+	//	torch::nn::Conv2d(torch::nn::Conv2dOptions(1,16,3).stride(2).padding(1)),
+	//	torch::nn::ReLU()
+	//};
 
-	const string model_save_path = "C:/Users/ø¿¿±ºÆ/Desktop/weight/model.pt";
+	//const string model_save_path = "C:/Users/ø¿¿±ºÆ/Desktop/weight/model.pt";
 
-	torch::save(model, model_save_path);
+	//torch::save(model, model_save_path);
 
-	cout << "Saved model:\n" << model << endl;
+	//cout << "Saved model:\n" << model << endl;
 
-	torch::load(model, model_save_path);
+	//torch::load(model, model_save_path);
 
-	cout << "Loaded model:\n" << model;
+	//cout << "Loaded model:\n" << model;
+
+	// =============================================================== //
+	//                      Linear Regression	                       //
+	// =============================================================== //
+
+
+	//cout << "Linear Regression\n\n";
+
+	//const int64_t input_size = 1;
+	//const int64_t output_size = 1;
+	//const size_t  num_epochs = 60;
+	//const double learning_rate = 0.001;
+
+	//auto x_train = torch::randint(0, 10, { 15,1 });
+	//auto y_train = torch::randint(0, 10, { 15,1 });
+
+	//torch::nn::Linear model(input_size, output_size);
+
+	//torch::optim::SGD optimizer(model->parameters(), torch::optim::SGDOptions(learning_rate));
+
+	//cout << fixed << setprecision(4);
+
+	//cout << "Training..." << endl;
+
+	//for (size_t epoch = 0; epoch != num_epochs; ++epoch)
+	//{
+	//	auto output = model(x_train);
+	//	auto loss = torch::nn::functional::mse_loss(output, y_train);
+
+	//	optimizer.zero_grad();
+	//	loss.backward();
+	//	optimizer.step();
+
+	//	if ((epoch + 1) % 5 == 0)
+	//	{
+	//		std::cout << "Epoch [" << (epoch + 1) << "/" << num_epochs <<
+	//			"], Loss: " << loss.item<double>() << "\n";
+
+	//	}
+	//}
+
+	//cout << "Training Finished!" << endl;
+
+
+	// =============================================================== //
+	//					 Logistic Regression					       //
+	// =============================================================== //
+
+	auto cuda_available = torch::cuda::is_available();
+	torch::Device device(cuda_available ? torch::kCUDA : torch::kCPU);
+	cout << (cuda_available ? "CUDA available. Training on GPU." : "Training on CPU.") << '\n';
+
+	const int64_t input_size = 784;
+	const int64_t num_classes = 10;
+	const int64_t batch_size = 100;
+	const size_t num_epochs = 5;
+	const double learning_rate = 0.001;
+
+	const string MNIST_data_path = "./data/mnist/";
+
+	auto train_dataset = torch::data::datasets::MNIST(MNIST_data_path)
+		.map(torch::data::transforms::Normalize<>(0.1307, 0.3081))
+		.map(torch::data::transforms::Stack<>());
+
+	auto num_train_samples = train_dataset.size().value();
+
+	auto test_dataset = torch::data::datasets::MNIST(MNIST_data_path)
+		.map(torch::data::transforms::Normalize<>(0.1307, 0.3081))
+		.map(torch::data::transforms::Stack<>());
+
+	auto num_test_samples = test_dataset.size().value();
+
+	cout << "Number of training set is " << num_train_samples << endl;
 
 	return 0;
 
 }
 
-void print_script_module(const torch::jit::script::Module& module, size_t spaces)
-{
-	for (const auto& sub_module : module.named_children())
-	{
-		if (!sub_module.name.empty())
-		{
-			cout << string(spaces, ' ') << sub_module.value.type()->name().value().name() << " " << sub_module.name << endl;
-		}
-
-		print_script_module(sub_module.value, spaces + 2);
-	}
-}
+//void print_script_module(const torch::jit::script::Module& module, size_t spaces)
+//{
+//	for (const auto& sub_module : module.named_children())
+//	{
+//		if (!sub_module.name.empty())
+//		{
+//			cout << string(spaces, ' ') << sub_module.value.type()->name().value().name() << " " << sub_module.name << endl;
+//		}
+//
+//		print_script_module(sub_module.value, spaces + 2);
+//	}
+//}

@@ -13,13 +13,10 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="소스 파일\basic">
-      <UniqueIdentifier>{3a30d186-854d-4d3a-8f24-2b4244030208}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pytorch_basics.cpp">
-      <Filter>소스 파일\basic</Filter>
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
