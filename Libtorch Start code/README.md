@@ -36,3 +36,9 @@ Convert from python weight to c++ weight using **trace.py** → Load converted w
 - Same to detect.cpp
 ### trace.py
 - Convert from python weight to c++ weight (Using Pretrained ResNet18)
+
+## Result
+### python version
+![python](./sample_data/python_output.PNG)
+### C++ version
+![python](./sample_data/c++_output.PNG)
