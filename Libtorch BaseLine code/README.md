@@ -18,8 +18,8 @@ Convert from python weight to c++ weight using **trace.py** → Load converted w
 
 ## directory structure
 ```
-+-- LibTorchBasePipeLine (c++)
-	+--LibTorchBasePipeLine
++-- LibTorchPipeLine (c++)
+	+--LibTorchPipeLine
 		+-- detect.cpp
 +-- trace model (python)
 	+-- detect.py

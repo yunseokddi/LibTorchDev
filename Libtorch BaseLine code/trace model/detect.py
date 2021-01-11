@@ -35,7 +35,7 @@ def idx_to_label(label_path, idx):
 
 if __name__ == "__main__":
     img_path = '../sample_data/dog.jpg'
-    label_path = '../sample_data/label.txt'
+    label_path = '../label.txt'
 
     # use pretrained model
     model = torchvision.models.resnet18(pretrained=True)
@@ -46,4 +46,4 @@ if __name__ == "__main__":
     pred_label = idx_to_label(label_path, pred_idx)
 
     print("Label: {}".format(pred_label))
-    print("Probability: {}%".format(round(prob*100, 3)))
+    print("Probability: {}%".format(round(prob*100, 4)))
