@@ -31,7 +31,7 @@ Convert from python weight to c++ weight using **trace.py** → Load converted w
 ```
 ## File Description
 ### detect.cpp
-- Load converted weight and run detect
+- Load converted weight and run detection
 ### detect.py
 - Same to detect.cpp
 ### trace.py
@@ -42,3 +42,6 @@ Convert from python weight to c++ weight using **trace.py** → Load converted w
 ![python](./sample_data/python_output.PNG)
 ### C++ version
 ![python](./sample_data/c++_output.PNG)
+
+## Gihub link
+[https://github.com/yunseokddi/LibTorchDev/tree/master/Libtorch%20Baseline](https://github.com/yunseokddi/LibTorchDev/tree/master/Libtorch%20Baseline)
