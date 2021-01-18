@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -145,10 +145,15 @@
     <ClCompile Include="cifar10.cpp" />
     <ClCompile Include="convnet.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="residual_block.cpp" />
+    <ClCompile Include="transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cifar10.h" />
     <ClInclude Include="convert.h" />
+    <ClInclude Include="residual_block.h" />
+    <ClInclude Include="resnet.h" />
+    <ClInclude Include="transform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

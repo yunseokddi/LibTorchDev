@@ -473,3 +473,5 @@ fabric.properties
 *.lib
 
 Libtorch Tutorials/turorial/turorial/mnist/
+
+/LibTorchDev/Libtorch Tutorials/turorial/turorial/cifar10/
