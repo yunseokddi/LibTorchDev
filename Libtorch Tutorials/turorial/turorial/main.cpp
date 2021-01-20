@@ -510,7 +510,7 @@ int main()
 	const size_t learning_rate_decay_frequency = 8;
 	const double learning_rate_decay_factor = 1.0 / 3.0;
 
-	const string CIFAR_data_path = "./data/cifar10/";
+	const string CIFAR_data_path = "./cifar10";
 
 	auto train_dataset = CIFAR10(CIFAR_data_path)
 		.map(ConstantPad(4))
@@ -518,6 +518,28 @@ int main()
 		.map(RandomHorizontalFlip())
 		.map(torch::data::transforms::Stack<>());
 
+	auto test_dataset = CIFAR10(CIFAR_data_path, CIFAR10::Mode::kTest)
+		.map(torch::data::transforms::Stack<>());
+
+	auto num_train_samples = train_dataset.size().value();
+	auto num_test_samples = test_dataset.size().value();
+
+	auto train_loader = torch::data::make_data_loader<torch::data::samplers::RandomSampler>
+		(move(train_dataset), batch_size);
+	auto test_loader = torch::data::make_data_loader<torch::data::samplers::RandomSampler>
+		(move(test_dataset), batch_size);
+
+	array<int64_t, 3> layers{ 2,2,2 };
+	ResNet<ResidualBlock> model(layers, num_classes);
+	model->to(device);
+
+	torch::optim::Adam optimizer(model->parameters(), torch::optim::AdamOptions(learning_rate));
+
+	cout << fixed << setprecision(4);
+
+	auto current_learning_rate = learning_rate;
+
+	cout << "Training..." << endl;
 
 	return 0;
 
