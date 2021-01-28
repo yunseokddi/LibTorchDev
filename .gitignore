@@ -475,3 +475,7 @@ fabric.properties
 Libtorch Tutorials/turorial/turorial/mnist/
 
 /LibTorchDev/Libtorch Tutorials/turorial/turorial/cifar10/
+
+*.weights
+*.cfg
+*.dll
